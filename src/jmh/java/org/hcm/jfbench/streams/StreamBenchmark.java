@@ -2,7 +2,10 @@ package org.hcm.jfbench.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
+
+import javax.validation.constraints.NotNull;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
@@ -18,8 +21,12 @@ public class StreamBenchmark {
 		}
 	}
 
-	public static class Result<T> {
+	public static class Result<T extends Number> {
 		T result;
+
+		public Result(@NotNull T result) {
+			this.result = Objects.requireNonNull(result);
+		}
 	}
 
 	@Benchmark
@@ -47,7 +54,7 @@ public class StreamBenchmark {
 
 	@Benchmark
 	public void testForEachStaticClass(Blackhole blackhole) {
-		final Result<Long> result = new Result<>();
+		final Result<Long> result = new Result<>(0L);
 		IntegerList.integerList.forEach(v -> result.result += v);
 		blackhole.consume(result.result);
 	}
