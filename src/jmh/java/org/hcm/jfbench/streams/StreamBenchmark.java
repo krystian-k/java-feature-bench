@@ -1,6 +1,6 @@
 package org.hcm.jfbench.streams;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,13 +13,18 @@ public class StreamBenchmark {
 
 	@State(Scope.Benchmark)
 	public static class IntegerList {
-		List<Integer> integerList = Arrays.asList(0, 100, 200, 300, 400, 500, 600, 700, 800, 900);
+		static List<Integer> integerList = new ArrayList<>();
+		static {
+			for (int i = 0; i < 10_000; i++) {
+				integerList.add(i);
+			}
+		}
 	}
 
 	@Benchmark
 	public void testSimpleLoop(IntegerList list, Blackhole blackhole) {
 		long result = 0L;
-		for (int v : list.integerList) {
+		for (int v : IntegerList.integerList) {
 			result += v;
 		}
 		blackhole.consume(result);
@@ -28,14 +33,14 @@ public class StreamBenchmark {
 	@Benchmark
 	public void testStreamReduceMethod(IntegerList list, Blackhole blackhole) {
 		long result;
-		result = list.integerList.stream().reduce(0, Integer::sum);
+		result = IntegerList.integerList.stream().reduce(0, Integer::sum);
 		blackhole.consume(result);
 	}
 
 	@Benchmark
 	public void testForEachAtomicLong(IntegerList list, Blackhole blackhole) {
 		final AtomicLong result = new AtomicLong();
-		list.integerList.forEach(result::addAndGet);
+		IntegerList.integerList.forEach(result::addAndGet);
 		blackhole.consume(result.get());
 	}
 }
