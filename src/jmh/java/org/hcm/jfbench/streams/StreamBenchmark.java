@@ -2,7 +2,7 @@ package org.hcm.jfbench.streams;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BinaryOperator;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
@@ -30,5 +30,12 @@ public class StreamBenchmark {
 		long result;
 		result = list.integerList.stream().reduce(0, Integer::sum);
 		blackhole.consume(result);
+	}
+
+	@Benchmark
+	public void testForEachAtomicLong(IntegerList list, Blackhole blackhole) {
+		final AtomicLong result = new AtomicLong();
+		list.integerList.forEach(v -> result.addAndGet(v));
+		blackhole.consume(result.get());
 	}
 }
