@@ -31,5 +31,6 @@ mainClassName = 'org.hcm.jfbench.App'
 jmh {
     jmhVersion = '1.18'
     duplicateClassesStrategy = 'warn'
-    iterations = 10
+    iterations = 20
+    resultFormat = 'JSON'
 }
