@@ -1,4 +1,4 @@
-package org.hcm.jfbench.streams;
+package org.hcm.jfbench.benchmarks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class StreamBenchmark {
+public class IntAdderBenchmark {
 
 	public static class IntegerList {
 		static List<Integer> integerList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class StreamBenchmark {
 	public static class Result<T extends Number> {
 		T result;
 
-		public Result(@NotNull T result) {
+		Result(@NotNull T result) {
 			this.result = Objects.requireNonNull(result);
 		}
 	}
