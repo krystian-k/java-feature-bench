@@ -13,7 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
-apply plugin: "me.champeau.gradle.jmh"
+apply plugin: 'me.champeau.gradle.jmh'
 
 repositories {
     jcenter()
@@ -23,14 +23,13 @@ dependencies {
     compile group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
     compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.2'
 
-    jmh group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.18'
-    jmh group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.18'
-
     testCompile group:'junit', name:'junit', version:'4.12'
 }
 
 mainClassName = 'org.hcm.jfbench.App'
 
 jmh {
+    jmhVersion = '1.18'
     duplicateClassesStrategy = 'warn'
+    iterations = 10
 }
