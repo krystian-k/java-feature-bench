@@ -35,7 +35,7 @@ public class StreamBenchmark {
 	@Benchmark
 	public void testForEachAtomicLong(IntegerList list, Blackhole blackhole) {
 		final AtomicLong result = new AtomicLong();
-		list.integerList.forEach(v -> result.addAndGet(v));
+		list.integerList.forEach(result::addAndGet);
 		blackhole.consume(result.get());
 	}
 }
