@@ -18,6 +18,10 @@ public class StreamBenchmark {
 		}
 	}
 
+	public static class Result<T> {
+		T result;
+	}
+
 	@Benchmark
 	public void testSimpleLoop(Blackhole blackhole) {
 		long result = 0L;
@@ -39,5 +43,12 @@ public class StreamBenchmark {
 		final AtomicLong result = new AtomicLong();
 		IntegerList.integerList.forEach(result::addAndGet);
 		blackhole.consume(result.get());
+	}
+
+	@Benchmark
+	public void testForEachStaticClass(Blackhole blackhole) {
+		final Result<Long> result = new Result<>();
+		IntegerList.integerList.forEach(v -> result.result += v);
+		blackhole.consume(result.result);
 	}
 }
