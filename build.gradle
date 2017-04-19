@@ -33,4 +33,5 @@ jmh {
     duplicateClassesStrategy = 'warn'
     iterations = 20
     resultFormat = 'JSON'
+    humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt")
 }

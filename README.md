@@ -1,1 +1,23 @@
 # java-feature-bench
+
+```
+# JMH 1.18 (released 36 days ago)
+# VM version: JDK 1.8.0_102, VM 25.102-b14
+# VM invoker: C:\jdk1.8.0_102_x64\jre\bin\java.exe
+# VM options: -Dfile.encoding=windows-1250 -Duser.country=US -Duser.language=en -Duser.variant
+# Warmup: 20 iterations, 1 s each
+# Measurement: 20 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+
+Benchmark                                              Mode  Cnt       Score     Error  Units
+IntAdderBenchmark.testForEachAtomicLong               thrpt  200   13240.082 ±  47.542  ops/s
+IntAdderBenchmark.testForEachResultLongClass          thrpt  200  126327.765 ± 613.013  ops/s
+IntAdderBenchmark.testForEachResultTemplateClass      thrpt  200   23276.377 ±  76.353  ops/s
+IntAdderBenchmark.testMTStreamReduceMethod            thrpt  200   31330.278 ± 121.301  ops/s
+IntAdderBenchmark.testSimpleLoop                      thrpt  200  140468.985 ± 741.820  ops/s
+IntAdderBenchmark.testSimpleLoopResultLongInnerClass  thrpt  200  141803.716 ± 485.884  ops/s
+IntAdderBenchmark.testSimpleLoopResultTemplateClass   thrpt  200   25425.013 ± 119.071  ops/s
+IntAdderBenchmark.testStreamReduceMethod              thrpt  200   23640.805 ±  74.032  ops/s
+```
