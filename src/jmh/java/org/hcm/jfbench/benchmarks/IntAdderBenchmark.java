@@ -10,14 +10,13 @@ import javax.validation.constraints.NotNull;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
-public class IntAdderBenchmark {
+	public class IntAdderBenchmark {
 
-	public static class IntegerList {
-		static List<Integer> integerList = new ArrayList<>();
-		static {
-			for (int i = 0; i < 10_000; i++) {
-				integerList.add(i);
-			}
+	static final int INT_ARRAY_LENGTH = 10_000;
+	static List<Integer> INTEGER_LIST = new ArrayList<>();
+	static {
+		for (int i = 0; i < INT_ARRAY_LENGTH; i++) {
+			INTEGER_LIST.add(i);
 		}
 	}
 
@@ -40,7 +39,7 @@ public class IntAdderBenchmark {
 	@Benchmark
 	public void testSimpleLoop(Blackhole blackhole) {
 		long result = 0L;
-		for (int v : IntegerList.integerList) {
+		for (int v : INTEGER_LIST) {
 			result += v;
 		}
 		blackhole.consume(result);
@@ -49,7 +48,7 @@ public class IntAdderBenchmark {
 	@Benchmark
 	public void testSimpleLoopResultLongInnerClass(Blackhole blackhole) {
 		ResultLong result = new ResultLong();
-		for (int v : IntegerList.integerList) {
+		for (int v : INTEGER_LIST) {
 			result.result += v;
 		}
 		blackhole.consume(result.result);
@@ -59,7 +58,7 @@ public class IntAdderBenchmark {
 	@Benchmark
 	public void testSimpleLoopResultTemplateClass(Blackhole blackhole) {
 		final Result<Long> result = new Result<>(0L);
-		for (int v : IntegerList.integerList) {
+		for (int v : INTEGER_LIST) {
 			result.result += v;
 		}
 		blackhole.consume(result.result);
@@ -68,35 +67,35 @@ public class IntAdderBenchmark {
 	@Benchmark
 	public void testStreamReduceMethod(Blackhole blackhole) {
 		long result;
-		result = IntegerList.integerList.stream().reduce(0, Integer::sum);
+		result = INTEGER_LIST.stream().reduce(0, Integer::sum);
 		blackhole.consume(result);
 	}
 
 	@Benchmark
 	public void testMTStreamReduceMethod(Blackhole blackhole) {
 		long result;
-		result = IntegerList.integerList.parallelStream().reduce(0, Integer::sum);
+		result = INTEGER_LIST.parallelStream().reduce(0, Integer::sum);
 		blackhole.consume(result);
 	}
 
 	@Benchmark
 	public void testForEachAtomicLong(Blackhole blackhole) {
 		final AtomicLong result = new AtomicLong();
-		IntegerList.integerList.forEach(result::addAndGet);
+		INTEGER_LIST.forEach(result::addAndGet);
 		blackhole.consume(result.get());
 	}
 
 	@Benchmark
 	public void testForEachResultTemplateClass(Blackhole blackhole) {
 		final Result<Long> result = new Result<>(0L);
-		IntegerList.integerList.forEach(v -> result.result += v);
+		INTEGER_LIST.forEach(v -> result.result += v);
 		blackhole.consume(result.result);
 	}
 
 	@Benchmark
 	public void testForEachResultLongClass(Blackhole blackhole) {
 		final ResultLong result = new ResultLong();
-		IntegerList.integerList.forEach(v -> result.result += v);
+		INTEGER_LIST.forEach(v -> result.result += v);
 		blackhole.consume(result.result);
 	}
 }

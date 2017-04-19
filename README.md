@@ -20,4 +20,9 @@ IntAdderBenchmark.testSimpleLoop                      thrpt  200  140468.985 ± 
 IntAdderBenchmark.testSimpleLoopResultLongInnerClass  thrpt  200  141803.716 ± 485.884  ops/s
 IntAdderBenchmark.testSimpleLoopResultTemplateClass   thrpt  200   25425.013 ± 119.071  ops/s
 IntAdderBenchmark.testStreamReduceMethod              thrpt  200   23640.805 ±  74.032  ops/s
+
+StringsBenchmark.testSimpleIteratorLoop               thrpt  200    269,519 ?   2,998  ops/s
+StringsBenchmark.testSimpleIteratorLoopStringBuilder  thrpt  200  29247,184 ? 644,364  ops/s
+StringsBenchmark.testSimpleLoop                       thrpt  200    256,275 ?   5,488  ops/s
+StringsBenchmark.testSimpleLoopStringBuilder          thrpt  200  34027,070 ?  94,363  ops/s
 ```
