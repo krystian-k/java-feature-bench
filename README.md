@@ -1,13 +1,12 @@
 # java-feature-bench
 
 ```
-# JMH 1.18 (released 36 days ago)
+# JMH 1.18
 # VM version: JDK 1.8.0_102, VM 25.102-b14
 # VM invoker: C:\jdk1.8.0_102_x64\jre\bin\java.exe
 # VM options: -Dfile.encoding=windows-1250 -Duser.country=US -Duser.language=en -Duser.variant
 # Warmup: 20 iterations, 1 s each
 # Measurement: 20 iterations, 1 s each
-# Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
 
@@ -25,4 +24,9 @@ StringsBenchmark.testSimpleIteratorLoop               thrpt  200    269,519 ?   
 StringsBenchmark.testSimpleIteratorLoopStringBuilder  thrpt  200  29247,184 ? 644,364  ops/s
 StringsBenchmark.testSimpleLoop                       thrpt  200    256,275 ?   5,488  ops/s
 StringsBenchmark.testSimpleLoopStringBuilder          thrpt  200  34027,070 ?  94,363  ops/s
+
+SortingBenchmark.testCollectionsStringListSort     thrpt  200  93667,494 ? 813,331  ops/s
+SortingBenchmark.testParallelStreamStringListSort  thrpt  200   3270,214 ?  49,580  ops/s
+SortingBenchmark.testStreamStringListSort          thrpt  200   4234,420 ?  30,394  ops/s
+SortingBenchmark.testStringListSort                thrpt  200  92498,277 ? 502,763  ops/s
 ```
