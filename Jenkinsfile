@@ -10,7 +10,11 @@ pipeline {
 			steps {
                 sh './gradlew tasks'
 			}
+			post {
+				success {
+					archive('**/build/reports/jmh/human.txt')
+				}
+			}
 		}
-
 	}
 }
