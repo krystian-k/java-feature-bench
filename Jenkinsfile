@@ -8,9 +8,7 @@ pipeline {
 	stages {
         stage('Build') {
 			steps {
-				dir('.') {
-					gradlew('tasks')
-				}
+                sh './gradlew tasks'
 			}
 		}
 
