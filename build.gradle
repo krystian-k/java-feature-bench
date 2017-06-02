@@ -15,6 +15,8 @@ apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'me.champeau.gradle.jmh'
 
+ext.benchmarksToRun = hasProperty('benchSpec') ? benchSpec : ""
+
 repositories {
     jcenter()
 }
@@ -34,4 +36,10 @@ jmh {
     iterations = 20
     resultFormat = 'JSON'
     humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt")
+    include = benchmarksToRun
+}
+
+afterEvaluate {
+    println ext.benchmarksToRun
+    println jmh.include
 }

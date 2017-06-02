@@ -6,11 +6,15 @@ pipeline {
 	}
 
 	stages {
-        stage('Build') {
+        stage('JMH') {
 			steps {
-                sh './gradlew tasks'
+                sh './gradlew jmh -PbenchSpec="IntAdderBenchmark"'
+			}
+			post {
+				success {
+					archive('**/build/reports/jmh/human.txt')
+				}
 			}
 		}
-
 	}
 }
