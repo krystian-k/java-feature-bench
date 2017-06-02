@@ -8,7 +8,7 @@ pipeline {
 	stages {
         stage('JMH') {
 			steps {
-                sh './gradlew jmh'
+                sh './gradlew jmh -PbenchSpec="IntAdderBenchmark"'
 			}
 			post {
 				success {

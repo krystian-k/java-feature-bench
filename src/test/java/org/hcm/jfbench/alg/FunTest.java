@@ -18,4 +18,10 @@ public class FunTest {
 		);
 		System.out.println("f: " + map.get("f"));
 	}
+
+	@Test
+	public void confusingTest() {
+		int i = (byte) + (char) - (int) + (long) - 1;
+		System.out.println(i);
+	}
 }
