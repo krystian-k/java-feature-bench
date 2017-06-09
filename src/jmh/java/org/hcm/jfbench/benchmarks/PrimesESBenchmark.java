@@ -20,4 +20,9 @@ public class PrimesESBenchmark {
 	public void testEratosthenesSieveV3(Blackhole blackhole) {
 		blackhole.consume(EratosthenesSieveNaive.getPrimesV3(0, 1_000_000));
 	}
+
+	@Benchmark
+	public void testEratosthenesSieveV3a(Blackhole blackhole) {
+		blackhole.consume(EratosthenesSieveNaive.getPrimesV3a(0, 1_000_000));
+	}
 }
