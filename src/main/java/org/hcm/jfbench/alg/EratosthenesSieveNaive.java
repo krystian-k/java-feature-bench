@@ -95,4 +95,35 @@ public class EratosthenesSieveNaive {
 		}
 		return result;
 	}
+
+	public static List<Integer> getPrimesV3a(int from, int to) {
+		int start = from > 1 ? from : 2;
+		int end = to >= start ? to : start;
+
+		if (to < 2) {
+			return Collections.emptyList();
+		}
+
+		final List<Integer> result = new ArrayList<>();
+		boolean[] array = new boolean[end+1];
+		array[0] = array[1] = true;
+
+		int limit = (int) Math.sqrt(end);
+
+		for (int i=2; i<=end; i++) {
+			if (!array[i]) {
+				if (i <= limit) {
+					for (int j = i * i; j <= end; j += i) {
+						array[j] = true;
+					}
+				}
+				if (i >= start) {
+					result.add(i);
+				}
+			}
+		}
+
+
+		return result;
+	}
 }

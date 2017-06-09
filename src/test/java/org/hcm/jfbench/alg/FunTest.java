@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Test;
 
@@ -23,5 +25,17 @@ public class FunTest {
 	public void confusingTest() {
 		int i = (byte) + (char) - (int) + (long) - 1;
 		System.out.println(i);
+	}
+
+	@Test
+	public void timingTest() throws InterruptedException {
+		Set<Long> sleepy = new TreeSet<>();
+		for (int i = 0; i < 10_000; i++) {
+			long start = System.currentTimeMillis();
+			Thread.sleep(2);
+			long timeSpent = System.currentTimeMillis() - start;
+			sleepy.add(timeSpent);
+		}
+		System.out.println(sleepy);
 	}
 }
