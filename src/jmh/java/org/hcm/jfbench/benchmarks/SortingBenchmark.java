@@ -3,6 +3,7 @@ package org.hcm.jfbench.benchmarks;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -13,13 +14,21 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class SortingBenchmark {
 
+	static final int STRING_ARRAY_LENGTH = 100_000;
+	static List<String> STRING_LIST = new ArrayList<>();
+	static {
+		for (int i = 0; i < STRING_ARRAY_LENGTH; i++) {
+			STRING_LIST.add(UUID.randomUUID().toString());
+		}
+	}
+
 	@State(Scope.Thread)
 	public static class Sort {
 		List<String> list;
 
 		@Setup
 		public void setup() {
-			this.list = new ArrayList<>(StringsBenchmark.STRING_LIST);
+			this.list = new ArrayList<>(STRING_LIST);
 		}
 	}
 
