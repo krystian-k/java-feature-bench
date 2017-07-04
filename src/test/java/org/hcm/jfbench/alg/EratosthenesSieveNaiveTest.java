@@ -54,4 +54,9 @@ public class EratosthenesSieveNaiveTest {
 	public void testPrimesV3a() {
 		assertEquals(numOfPrimes, EratosthenesSieveNaive.getPrimesV3a(rangeStart, rangeEnd).size());
 	}
+
+	@Test
+	public void testPrimesV4() {
+		assertEquals(numOfPrimes, EratosthenesSieveNaive.getPrimesV4(rangeStart, rangeEnd).size());
+	}
 }

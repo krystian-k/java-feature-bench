@@ -2,7 +2,9 @@ package org.hcm.jfbench.alg;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EratosthenesSieveNaive {
 
@@ -79,12 +81,11 @@ public class EratosthenesSieveNaive {
 
 		int limit = (int) Math.sqrt(end);
 
-		for (int i=2; i<=limit; i++) {
-			if (!array[i]) {
-				for (int j = i * i; j <= end; j += i) {
-					array[j] = true;
-				}
+		for (int i=2; i<=limit;) {
+			for (int j = i * i; j <= end; j += i) {
+				array[j] = true;
 			}
+			while (array[++i]);
 		}
 
 		final List<Integer> result = new ArrayList<>();
@@ -125,5 +126,44 @@ public class EratosthenesSieveNaive {
 
 
 		return result;
+	}
+
+	public static List<Integer> getPrimesV4(int from, int to) {
+		int start = from > 1 ? from : 2;
+		int end = to >= start ? to : start;
+
+		if (to < 2) {
+			return Collections.emptyList();
+		}
+
+		boolean[] array = new boolean[end+1];
+		array[0] = array[1] = true;
+		int i = 2, j;
+		long x;
+
+		int limit = (int) Math.sqrt(end);
+
+		while (i <= limit) {
+			j = i;
+			while ((x = i * j) <= end) {
+				while (x > 0 && x <= end) {
+					array[(int) x] = true;
+					x *= i;
+				}
+				while (array[++j]);
+			}
+			while (array[++i]);
+		}
+
+		final List<Integer> result = new ArrayList<>();
+		for (int ii = start; ii <= end; ii++) {
+			if (!array[ii]) {
+				result.add(ii);
+			}
+		}
+		return result;
+	}
+
+	static void getDiff() {
 	}
 }
