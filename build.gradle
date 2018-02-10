@@ -6,14 +6,16 @@ buildscript {
         }
     }
     dependencies {
-        classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
+        classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.5"
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
     }
 }
 
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'me.champeau.gradle.jmh'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
-apply plugin: 'me.champeau.gradle.jmh'
 
 ext.benchmarksToRun = hasProperty('benchSpec') ? benchSpec : ""
 
@@ -31,15 +33,18 @@ dependencies {
 mainClassName = 'org.hcm.jfbench.App'
 
 jmh {
-    jmhVersion = '1.18'
+    jmhVersion = "1.19"
     duplicateClassesStrategy = 'warn'
-    iterations = 20
+    iterations = 10
     resultFormat = 'JSON'
     humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt")
     include = benchmarksToRun
 }
 
+jmhJar {
+    configurations = [project.configurations.jmh]
+}
+
 afterEvaluate {
-    println ext.benchmarksToRun
-    println jmh.include
+	println project.configurations.jmh.files
 }
