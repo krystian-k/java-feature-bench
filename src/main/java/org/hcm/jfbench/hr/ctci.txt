@@ -1,0 +1,4 @@
+Arrays: Left Rotation
+Strings: Making Anagrams
+Hash Tables: Ransom Note
+Linked Lists: Detect a Cycle
