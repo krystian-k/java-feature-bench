@@ -16,3 +16,6 @@ hs_err_pid*
 /java-feature-bench.iws
 /java-feature-bench.iml
 /java-feature-bench.ipr
+/.gradle/
+/build/
+/out/
