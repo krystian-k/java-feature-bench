@@ -20,6 +20,7 @@ public class RoadsAndLibsTest {
 		System.setOut(new PrintStream(out));
 		RoadsAndLibs.main(new String[0]);
 		final String result = out.toString().trim().replace("\r\n", ";");
+		System.err.println(result);
 		assertEquals(response, result);
 		return response.equalsIgnoreCase(result);
 	}
