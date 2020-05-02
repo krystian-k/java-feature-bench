@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.5"
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.0.0"
     }
 }
 
@@ -16,6 +16,8 @@ apply plugin: 'me.champeau.gradle.jmh'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
+
+mainClassName = 'org.hcm.jfbench.App'
 
 ext.benchmarksToRun = hasProperty('benchSpec') ? benchSpec : ""
 
@@ -30,8 +32,6 @@ dependencies {
     testCompile group:'junit', name:'junit', version:'4.12'
 }
 
-mainClassName = 'org.hcm.jfbench.App'
-
 jmh {
     jmhVersion = "1.19"
     duplicateClassesStrategy = 'warn'
@@ -43,6 +43,11 @@ jmh {
 
 jmhJar {
     configurations = [project.configurations.jmh]
+}
+
+test {
+    minHeapSize = "1G"
+    maxHeapSize = "1G"
 }
 
 afterEvaluate {
